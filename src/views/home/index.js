@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {getData} from "../axios/api";
+import {getData} from "../../axios/api";
 
 class Home extends Component{
   async getData(){
