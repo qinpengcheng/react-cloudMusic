@@ -1,0 +1,134 @@
+$color:#C62F2F;
+.headers{
+  width: 100%;
+  height: 50px;
+  background-color: $color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &>div{
+    height: 100%;
+  }
+  .headers-left{
+    flex: 2;
+    display: flex;
+    align-self: center;
+    .headers-left-log{
+      height: 100%;
+      width: 180px;
+      background: url("../../asset/img/header/topbar.png")no-repeat 40px -1px;
+      background-size: 100%;
+      margin-right: 40px;
+      margin-left: -30px;
+    }
+    .headers-left-btns{
+      display: flex;
+      align-items: center;
+      button{
+        border: 1px solid #A82828;
+        background-color: #C62F2F;
+        border-radius: 4px;
+        padding: 1px 8px;
+        cursor: pointer;
+        &.none{
+          cursor: default;
+        }
+        &:focus{
+          outline: 0;
+        }
+        &:first-child{
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          border-right: 0;
+        }
+        &:last-child{
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+        i{
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          &.prev{
+            background: url("../../asset/img/header/prev.png")no-repeat center center;
+            background-size: 90%;
+          }
+          &.next{
+            background: url("../../asset/img/header/next.png")no-repeat center center;
+            background-size: 90%;
+          }
+        }
+      }
+    }
+    .headers-left-search{
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      input{
+        background-color: #A82828;
+        height: 19px;
+        width: 185px;
+        padding: 1px 8px 2px;
+        color: #fff;
+        border-radius: 15px;
+        border: none;
+        &:focus{
+          outline: 0;
+        }
+        &::placeholder{
+          color: #C77373;
+        }
+      }
+    }
+  }
+  .headers-right{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 15px;
+    font-size: 12px;
+    color: #EEC1C1;
+    .headers-right-img{
+      width: 25px;
+      height: 25px;
+      margin-right: 7px;
+      background-color: #ccc;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 25px;
+      img{
+        width: 16px;
+        height: 16px;
+      }
+    }
+    .headers-right-userInfo,.headers-right-vip{
+      cursor: pointer;
+      &:hover{
+        color: #ffffff;
+        i{
+          border-top-color: #ffffff;
+        }
+      }
+      i{
+        display: inline-block;
+        border: 5px solid $color ;
+        border-top-color:#EEC1C1;
+        margin: 0 10px -3px 7px;
+      }
+    }
+    .headers-right-skin-peeler{
+      width: 16px;
+      height: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      i{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        background: url("../../asset/img/header/skin-peeler.png")no-repeat;
+        background-size: 95%;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.menu{
+  width: 200px;
+  box-sizing: border-box;
+  font-size: 14px;
+  background-color: #F5F5F7;
+  border-right: 1px solid #E1E1E2;
+  padding: 10px 0;
+  .menu-item{
+    .menu-item-title{
+      padding: 0 10px;
+      color: #5C5C5C;
+    }
+    .menu-item-ul{
+      width: 100%;
+      .menu-item-li{
+        height: 30px;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        color: #5C5C5C;
+        cursor: pointer;
+        &.active{
+          border-left: 3px solid #C62F2F;
+        }
+        img{
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
