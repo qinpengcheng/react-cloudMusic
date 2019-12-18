@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const service = axios.create({
   timeout:5000,
-  baseURL:'http://localhost:4000/'
+  baseURL:'https://api.apiopen.top'
 })
 
 service.interceptors.request.use(config=>{
@@ -11,7 +11,6 @@ service.interceptors.request.use(config=>{
   Promise.reject(error)
 })
 service.interceptors.response.use(response=>{
-  console.log(response);
   return response.data
 },error=>{
  return Promise.reject(error)

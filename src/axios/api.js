@@ -1,7 +1,7 @@
 import service from './request'
 export const getData = params =>{
   return service({
-    url:'/search',
+    url:'/getJoke',
     method:'get',
     params
   })
