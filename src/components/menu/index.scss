@@ -11,20 +11,37 @@
       color: #5C5C5C;
     }
     .menu-item-ul{
+      margin-top: 10px;
       width: 100%;
       .menu-item-li{
-        height: 30px;
+        height: 32px;
         display: flex;
         align-items: center;
         padding-left: 15px;
         color: #5C5C5C;
         cursor: pointer;
+        position: relative;
+        &:hover{
+          color: #000;
+        }
         &.active{
-          border-left: 3px solid #C62F2F;
+          background-color: #E6E7EA;
+          color: #000;
+          &:before{
+            position: absolute;
+            left: 0;
+            top: 0;
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 100%;
+            background-color: #C62F2F;
+          }
         }
         img{
           width: 20px;
           height: 20px;
+          margin-right: 10px;
         }
       }
     }

@@ -24,7 +24,7 @@ class Header extends Component{
         </div>
         <div className='headers-right'>
           <div className='headers-right-img'>
-            <img  src={this.state.headImg} />
+            <img  src={this.state.headImg} alt=''/>
           </div>
           <div className='headers-right-userInfo'>
             <span>{this.state.userName}</span>
