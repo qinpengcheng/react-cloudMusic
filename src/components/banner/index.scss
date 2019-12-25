@@ -1,0 +1,41 @@
+.banner{
+  margin-top: 30px;
+  position: relative;
+  .btn{
+    width: 32px;
+    height: 32px;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: #5C5C5C;
+  }
+  .banner-next{
+    right: 10%;
+      background: url("../../asset/img/header/next.png")no-repeat;
+      background-size: cover;
+  }
+  .banner-prev{
+    left: 10%;
+      background: url("../../asset/img/header/prev.png")no-repeat;
+      background-size: cover;
+  }
+  .ant-carousel .slick-slide {
+    text-align: center;
+    height: 300px;
+    line-height: 160px;
+    background-color: #364d79;
+    overflow: hidden;
+    img{
+      width: 100%;
+
+    }
+
+  }
+
+  .ant-carousel .slick-slide h3 {
+    color: #fff;
+  }
+}
+
