@@ -9,6 +9,10 @@ class Header extends Component{
         headImg:defaultImg
       }
     }
+    componentDidMount() {
+      console.log(this);
+    }
+
   render() {
     return(
       <div className='headers'>

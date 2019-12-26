@@ -1,0 +1,92 @@
+.play{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background-color: #F6F6F8;
+  border-top: 1px solid #E1E1E2;
+  display: flex;
+  align-items: center;
+  .play-btn{
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    button{
+      padding: 0;
+      border: 1px solid #F1C6C8;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 35px;
+      background-color: #E83C3C;
+      cursor: pointer;
+      transition: all 0.2s;
+      i{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+      }
+      &:hover{
+        background-color:#D33030;
+      }
+      &:focus{
+        outline: 0;
+      }
+      &.play-btn-audioPlay{
+        width: 35px;
+        height: 35px;
+        line-height: 40px;
+        i{
+          background: url("../../asset/img/icon/paly.png") no-repeat 2px 0;
+          background-size:cover;
+        }
+      }
+      &.play-btn-audioPause{
+        width: 35px;
+        height: 35px;
+        line-height: 40px;
+        i{
+          background: url("../../asset/img/icon/pause.png") no-repeat 2px 0;
+          background-size:cover;
+        }
+      }
+      &.play-btn-prev{
+        i{
+          background: url("../../asset/img/icon/prev-play.png") no-repeat -1px -1px;
+          background-size:cover;
+        }
+      }
+      &.play-btn-next{
+        i{
+          background: url("../../asset/img/icon/next-play.png") no-repeat -1px -1px;
+          background-size:cover;
+        }
+      }
+    }
+
+  }
+  .play-time{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    audio{
+      display: none;
+    }
+    .ant-progress-inner{
+      top: -2px;
+      background-color: #C2C2C4;
+    }
+    .currentTime{
+      margin-right: 15px;
+    }
+    .duration{
+      margin-left: 15px;
+    }
+  }
+  .play-info{
+    width: 350px;
+  }
+}

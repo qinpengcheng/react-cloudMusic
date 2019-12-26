@@ -1,6 +1,12 @@
 .home{
   padding: 0 30px;
+  min-width: 900px;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .table{
+    width: 100%;
     height: 45px;
     border-bottom: 1px solid #E1E1E2;
     ul{
@@ -33,5 +39,8 @@
         }
       }
     }
+  }
+  .content{
+    width: 800px;
   }
 }

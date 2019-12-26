@@ -1,7 +1,7 @@
 import service from './request'
-export const getData = params =>{
+export const personalized = params =>{
   return service({
-    url:'/getJoke',
+    url:'/personalized',
     method:'get',
     params
   })

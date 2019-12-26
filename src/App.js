@@ -3,17 +3,17 @@ import {HashRouter  as Router,Route} from 'react-router-dom'
 import {routers} from './router'
 import Header from './components/header'
 import Menu from './components/menu'
+import Play from './components/play'
 
 class App extends Component{
-
   render() {
     return (
       <div className="App">
-        <Header></Header>
-        <div className='container'>
-            <Router>
-              <Menu></Menu>
-              <div className='container-right'>
+        <Router>
+          <Header></Header>
+          <div className='container'>
+            <Menu></Menu>
+            <div className='container-right'>
               {
                 routers.map((item,index)=>{
                   if(item.exact){
@@ -34,9 +34,10 @@ class App extends Component{
                   }
                 })
               }
-              </div>
-            </Router>
-        </div>
+            </div>
+          </div>
+          <Play></Play>
+        </Router>
       </div>
     );
   }

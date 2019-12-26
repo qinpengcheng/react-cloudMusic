@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const service = axios.create({
-  timeout:5000,
-  baseURL:'https://api.apiopen.top'
+  timeout:10000,
+  baseURL:'http://localhost:4000'
 })
 
 service.interceptors.request.use(config=>{

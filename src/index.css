@@ -20,7 +20,9 @@ code {
 .container{
     height: calc(100% - 50px);
     display: flex;
+    overflow: hidden;
 }
 .container-right{
     width: calc(100% - 200px);
+    overflow-y: scroll;
 }
