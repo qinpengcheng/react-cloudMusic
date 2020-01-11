@@ -9,6 +9,12 @@ class playList extends Component{
       source:''
     }
   }
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    let {data} = nextProps
+    if(this.props.data !=data){ //切换歌单重新播放
+      this.props.changeId(data[0].id)
+    }
+  }
 
   //选中的歌曲
   checked(id){

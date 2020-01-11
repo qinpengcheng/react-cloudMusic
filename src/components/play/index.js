@@ -7,7 +7,6 @@ import {getPlayUrl} from '../../axios/api'
 import {notification } from 'antd';
 import {SET_PLAY_INDEX} from "../../store/action";
 
-let _this = null
 class Play extends Component{
   constructor(...args){
     super(...args)
@@ -34,7 +33,6 @@ class Play extends Component{
 
 
   componentDidMount() {
-    _this = this
     this.setVolume(this.state.volume/100)
   }
   //播放
@@ -236,10 +234,6 @@ class Play extends Component{
   }
 }
 export default connect(function (state, props) {
-  if(_this && state.playList.playIndex ===0){
-    let id = state.playList.ids[0].id
-    // _this.getPlayUrl(id)
-  }
   return state.playList
 },{
   setPlayIndex(index){
