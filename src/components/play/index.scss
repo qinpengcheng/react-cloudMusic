@@ -8,6 +8,7 @@
   border-top: 1px solid #E1E1E2;
   display: flex;
   align-items: center;
+  z-index: 10;
   .play-btn{
     width: 200px;
     display: flex;
@@ -68,6 +69,9 @@
     }
 
   }
+  .play-info-volume{
+    width: 95px;
+  }
   .play-time{
     flex: 1;
     display: flex;
@@ -90,6 +94,7 @@
     margin-left: 15px;
     display: flex;
     align-items: center;
+    width: 350px;
     .play-info-switch{
       margin-right: 5px;
       i {
@@ -108,42 +113,36 @@
         }
       }
     }
-    .play-info-volume{
-      width: 95px;
-      position: relative;
-      .ant-progress-inner{
-        top: -2px;
-        background-color:#E6E6E8;
-      }
-      &:hover{
-        .btn{
-          visibility:visible;
-
+    .play-info-action{
+      display: flex;
+      align-items: center;
+      i{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        margin-left: 20px;
+        &.play-list{
+          background: url("../../asset/img/icon/play-list.png") no-repeat;
+          background-size: cover;
         }
-      }
-      .btn{
-        visibility:hidden;
-        z-index: 1;
-        border: 1px solid #CFCFCF;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background-color: #ffffff;
-        position: absolute;
-        left: 0;
-        top: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        i{
-          display: inline-block;
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background-color: #E83C3C;
+        &.random-play{
+          background: url("../../asset/img/icon/random-play.png") no-repeat;
+          background-size: cover;
+        }
+        &.sequential-play{
+          background: url("../../asset/img/icon/sequential-play.png") no-repeat;
+          background-size: cover;
+        }
+        &.loop-play{
+          background: url("../../asset/img/icon/loop-play.png") no-repeat;
+          background-size: cover;
+        }
+        &.single-play{
+          background: url("../../asset/img/icon/single-play.png") no-repeat;
+          background-size: cover;
         }
       }
     }
-    width: 350px;
   }
 }

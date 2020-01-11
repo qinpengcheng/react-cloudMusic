@@ -1,0 +1,115 @@
+.modal{
+  width: 580px;
+  height: 480px;
+  position: absolute;
+  right: 0;
+  bottom: 50px;
+  background-color: #fff;
+  z-index: 5;
+  box-shadow: -1px -1px 5px rgba(0,0,0,0.4);
+  .modal-header{
+    box-sizing: content-box;
+    height: 40px;
+    border-bottom: 1px solid #E1E1E2;
+    border-top: 1px solid #E1E1E2;
+    background-color: #F4F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .modal-header-btn{
+      border: 1px solid #E5E5E5;
+      padding: 4px 30px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #888888;
+      background-color: #fff;
+      &:hover{
+        color: #666666;
+        background-color: #F5F5F7;
+      }
+      &.active{
+        background-color: #7C7D85;
+        color: #ffffff;
+      }
+      &:last-of-type{
+        border-left: none;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      &:first-of-type{
+        border-right: none;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+    }
+    .modal-header-close{
+        position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+      width: 10px;
+      height: 10px;
+      background: url("../../asset/img/icon/close.png") no-repeat;
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+  .modal-content{
+    .play-list{
+      height: 438px;
+      overflow-y: scroll;
+      .play-list-item{
+        height: 30px;
+        padding: 0 30px;
+        background-color: #FAFAFA;
+        display: flex;
+        align-items: center;
+        position: relative;
+        &:nth-of-type(2n){
+          background-color: #F5F5F7;
+        }
+        &:hover{
+          background-color: #EBECED;
+        }
+        .sign{
+          position: absolute;
+          left: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 16px;
+          height: 16px;
+          background: url("../../asset/img/icon/sign.png") no-repeat;
+          background-size: cover;
+          visibility: hidden;
+        }
+        .name{
+          width: 350px;
+          color: #000;
+          cursor: default;
+          .sq{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: url("../../asset/img/icon/SQ.png")no-repeat;
+            background-size: cover;
+            vertical-align: text-top;
+          }
+        }
+        .auth{
+          width: 100px;
+          color: #888888;
+          cursor: pointer;
+        }
+        .source{
+          width: 16px;
+          height: 16px;
+          background: url("../../asset/img/icon/source.png")no-repeat;
+          background-size: cover;
+          margin-right: 25px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

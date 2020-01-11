@@ -1,7 +1,13 @@
 import React,{Component} from 'react'
-import {Progress } from 'antd'
+import {connect} from 'react-redux'
 import './index.scss'
-import audioSrc from '../../asset/mp3/418291969.mp3'
+import ProgressBar from '../progress'
+import Playlist from '../playList'
+import {getPlayUrl} from '../../axios/api'
+import {notification } from 'antd';
+import {SET_PLAY_INDEX} from "../../store/action";
+
+let _this = null
 class Play extends Component{
   constructor(...args){
     super(...args)
@@ -13,21 +19,41 @@ class Play extends Component{
       volume:30,
       volume2:0,
       isDown:false,
-      x:0,
-      l:0,
+      playOrderClass:[
+        {className:'sequential-play',title:'顺序播放'},
+        {className:'random-play',title:'随机播放'},
+        {className:'loop-play',title:'列表循环'},
+        {className:'single-play',title:'单曲循环'},
+        ],
+      playOrder:0,
+      audioSrc:'',
+      isShow:false,
+      currentId:''
     }
   }
-  componentDidMount() {
-    this.refs.audio.volume = this.state.volume/100
-    this.refs.btn.style.left=Math.floor(this.state.volume * 85 / 100) +'px'
 
+
+  componentDidMount() {
+    _this = this
+    this.setVolume(this.state.volume/100)
   }
   //播放
   play(){
-    this.refs.audio.play()
-    this.setState({
-      playStatus : 1
-    })
+    if(this.state.currentId === ''){
+      if(this.props.ids.length){
+        this.getPlayUrl(this.props.ids[0].id)
+      }else{
+        notification.error({
+          duration:1,
+          message:'请选择歌单'
+        })
+      }
+    }else{
+      this.refs.audio.play()
+      this.setState({
+        playStatus : 1
+      })
+    }
   }
   //暂停
   pause(){
@@ -40,7 +66,8 @@ class Play extends Component{
   playing(e){
     let duration = Math.floor(this.refs.audio.duration)
     let dm = Math.floor(duration/60)
-    let durationStr = `${dm}:${Math.floor(duration-(dm*60))}`
+    let ds = Math.floor(duration-(dm*60))
+    let durationStr = `${dm<10?'0'+dm:dm}:${ds<10?'0'+ds:ds}`
     let currentTime = Math.floor(this.refs.audio.currentTime)
     let cm = Math.floor(currentTime/60)
     let s = Math.floor(currentTime-(cm*60))
@@ -51,6 +78,35 @@ class Play extends Component{
       percent:currentTime/duration*100
     })
   }
+  //音量修改
+  setVolume(volume){
+    this.refs.audio.volume =volume
+  }
+  //音量改变
+  onChange(val){
+    this.setState({
+      volume:val
+    })
+    this.setVolume(val/100)
+  }
+  //播放进度改变
+  onPercentChange(val){
+    this.setState({
+      percent:val
+    })
+  }
+  //播放顺序切换
+  togglePlay(){
+    this.setState({
+      playOrder:this.state.playOrder+=1
+    })
+    if(this.state.playOrder >3){
+      this.setState({
+        playOrder:0
+      })
+    }
+  }
+  //静音切换
   switchVolume(){
     if(this.state.volume !==0){
       this.refs.audio.volume = 0
@@ -65,63 +121,101 @@ class Play extends Component{
       })
     }
   }
-  btnMouseDow(e){
-    e.persist()
-    //获取x坐标和y坐标
-    //开关打开
-    //获取左部和顶部的偏移量
-    this.setState({
-      x:e.clientX,
-      l:this.refs.btn.offsetLeft,
-      isDown:true
-    })
-    this.refs.btn.style.cursor = 'pointer'
-    console.log('开');
-  }
-  btnMouseUp(){
-    //关
-    console.log('关');
-    this.setState({
-      isDown:false
-    })
-    this.refs.btn.style.cursor = 'default'
-  }
-  btnMousemove(e){
-    e.persist()
-    if(this.state.isDown){
-      let nx = e.clientX;
-      //计算移动后的左偏移量和顶部的偏移量
-      let nl = nx - (this.state.x - this.state.l);
-      if(nl>85 || nl<0){
-        return false
-      }
-      console.log(Math.floor(nl / 85 *100));
-      this.refs.audio.volume = Math.floor(nl / 85 *100)/100
-      this.refs.btn.style.left=nl+'px'
+  //根据id获取音乐url
+  async getPlayUrl(id){
+    let data ={
+      id
+    }
+    let res = await getPlayUrl(data)
+    if(res.code === 200 && res.data[0].url){
       this.setState({
-        volume:Math.floor(nl / 85 *100)
+        audioSrc:res.data[0].url,
+        currentId:id
+      })
+      let ids = this.props.ids.map(item=>item.id)
+      let index = ids.indexOf(id)
+      //设置当前播放的index
+      this.props.setPlayIndex(index)
+      // this.refs.audio.playbackRate = '10'
+      this.play()
+    }else{
+      notification.error({
+        placement:'topRight',
+        duration:1.5,
+        message:'播放失败'
       })
     }
+  }
+  //上一首
+  playPrev(){
+    let ids = this.props.ids.map(item=>item.id)
+    let prevId = ids[this.props.playIndex-1]
+    this.getPlayUrl(prevId)
+  }
+  //下一首
+  nextPrev(){
+    let ids = this.props.ids.map(item=>item.id)
+    let nextId = ids[this.props.playIndex+1]
+    this.getPlayUrl(nextId)
+  }
+  //播放结束后
+  playEnd(e){
+    this.setState({
+      playStatus : 0
+    })
+    let ids = this.props.ids.map(item=>item.id)
+    let {playOrder,currentId} = this.state
+    let currentIndex = this.props.playIndex
+    let nextId = ''
+    let random = Math.floor(Math.random() * ids.length)
+    switch (playOrder) {
+      case 0:
+        nextId = ids[currentIndex+1]
+        break;
+      case 1:
+        nextId = ids[random]
+        break;
+      case 2:
+        nextId = ids[currentIndex === ids.length-1?0:currentIndex+1]
+        break;
+      case 3:
+        nextId = ids[currentIndex]
+        break;
+    }
+    if(nextId){
+      this.getPlayUrl(nextId)
+    }else{
+      this.setState({
+        currentId:''
+      })
+    }
+  }
+  //播放列表关闭/打开
+  modalChange(){
+    this.setState({
+      isShow:!this.state.isShow
+    })
   }
   render() {
     return (
       <div className='play'>
         <div className='play-btn'>
-          <button className='play-btn-prev'><i></i></button>
+          <button className='play-btn-prev' onClick={this.playPrev.bind(this)}><i></i></button>
           {
             this.state.playStatus?(<button className='play-btn-audioPause' onClick={this.pause.bind(this)}><i></i></button>):
               (<button className='play-btn-audioPlay' onClick={this.play.bind(this)}><i></i></button>)
           }
-          <button className='play-btn-next'><i></i></button>
+          <button className='play-btn-next' onClick={this.nextPrev.bind(this)}><i></i></button>
         </div>
         <div className='play-time'>
           <audio
+            onEnded={this.playEnd.bind(this)}
             onTimeUpdate={this.playing.bind(this)}
-            src={audioSrc}
+            src={this.state.audioSrc}
             ref='audio'
           >您的浏览器不支持 audio 标签。</audio>
           <span className='currentTime'>{this.state.currentTime}</span>
-          <Progress percent={this.state.percent} size="small" strokeColor='#E83C3C' showInfo={false} />
+          <ProgressBar percent={this.state.percent} onChange={this.onPercentChange.bind(this)}></ProgressBar>
           <span className='duration'>{this.state.duration}</span>
         </div>
         <div className='play-info'>
@@ -129,13 +223,30 @@ class Play extends Component{
             <i className={this.state.volume>0?'up':'down'}></i>
           </div>
           <div className='play-info-volume'>
-            <span className='btn' ref='btn' onMouseDown={this.btnMouseDow.bind(this)} onMouseMove={this.btnMousemove.bind(this)} onMouseUp={this.btnMouseUp.bind(this)}><i></i></span>
-            <Progress percent={this.state.volume} size="small" strokeColor='#E83C3C' showInfo={false} />
+            <ProgressBar hide={true} percent={this.state.volume} onChange={this.onChange.bind(this)}></ProgressBar>
+          </div>
+          <div className='play-info-action'>
+            <i  onClick={this.togglePlay.bind(this)} className={this.state.playOrderClass[this.state.playOrder].className} title={this.state.playOrderClass[this.state.playOrder].title}></i>
+            <i title="打开播放列表" className='play-list' onClick={this.modalChange.bind(this)}></i>
           </div>
         </div>
+        <Playlist changeId={this.getPlayUrl.bind(this)} isShow={this.state.isShow} onchange={this.modalChange.bind(this)}></Playlist>
       </div>
     )
   }
-
 }
-export default Play
+export default connect(function (state, props) {
+  if(_this && state.playList.playIndex ===0){
+    let id = state.playList.ids[0].id
+    // _this.getPlayUrl(id)
+  }
+  return state.playList
+},{
+  setPlayIndex(index){
+    console.log(index);
+    return{
+      type:SET_PLAY_INDEX,
+      index
+    }
+  }
+})(Play)
