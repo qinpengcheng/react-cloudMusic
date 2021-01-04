@@ -1,101 +1,104 @@
-.play{
+.play {
   position: absolute;
   bottom: 0;
   left: 0;
   height: 50px;
   width: 100%;
-  background-color: #F6F6F8;
-  border-top: 1px solid #E1E1E2;
+  background-color: #f6f6f8;
+  border-top: 1px solid #e1e1e2;
   display: flex;
   align-items: center;
   z-index: 10;
-  .play-btn{
+  .play-btn {
     width: 200px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    button{
+    flex-shrink: 0;
+    button {
       padding: 0;
-      border: 1px solid #F1C6C8;
+      border: 1px solid #f1c6c8;
       width: 30px;
       height: 30px;
       border-radius: 50%;
       text-align: center;
       line-height: 35px;
-      background-color: #E83C3C;
+      background-color: #e83c3c;
       cursor: pointer;
       transition: all 0.2s;
-      i{
+      i {
         display: inline-block;
         width: 16px;
         height: 16px;
       }
-      &:hover{
-        background-color:#D33030;
+      &:hover {
+        background-color: #d33030;
       }
-      &:focus{
+      &:focus {
         outline: 0;
       }
-      &.play-btn-audioPlay{
+      &.play-btn-audioPlay {
         width: 35px;
         height: 35px;
         line-height: 40px;
-        i{
+        i {
           background: url("../../asset/img/icon/paly.png") no-repeat 2px 0;
-          background-size:cover;
+          background-size: cover;
         }
       }
-      &.play-btn-audioPause{
+      &.play-btn-audioPause {
         width: 35px;
         height: 35px;
         line-height: 40px;
-        i{
+        i {
           background: url("../../asset/img/icon/pause.png") no-repeat 2px 0;
-          background-size:cover;
+          background-size: cover;
         }
       }
-      &.play-btn-prev{
-        i{
+      &.play-btn-prev {
+        i {
           background: url("../../asset/img/icon/prev-play.png") no-repeat -1px -1px;
-          background-size:cover;
+          background-size: cover;
         }
       }
-      &.play-btn-next{
-        i{
+      &.play-btn-next {
+        i {
           background: url("../../asset/img/icon/next-play.png") no-repeat -1px -1px;
-          background-size:cover;
+          background-size: cover;
         }
       }
     }
-
   }
-  .play-info-volume{
+  .play-info-volume {
     width: 95px;
   }
-  .play-time{
+  .play-time {
     flex: 1;
     display: flex;
     align-items: center;
-    audio{
+    audio {
       display: none;
     }
-    .ant-progress-inner{
+    .ant-progress-inner {
       top: -2px;
-      background-color: #C2C2C4;
+      background-color: #c2c2c4;
     }
-    .currentTime{
+    .currentTime {
       margin-right: 15px;
+      user-select: none;
     }
-    .duration{
+    .duration {
       margin-left: 15px;
+      user-select: none;
     }
   }
-  .play-info{
+  .play-info {
     margin-left: 15px;
     display: flex;
     align-items: center;
     width: 350px;
-    .play-info-switch{
+    flex-shrink: 0;
+    .play-info-switch {
       margin-right: 5px;
       i {
         display: inline-block;
@@ -103,42 +106,42 @@
         height: 16px;
         margin-top: 4px;
         cursor: pointer;
-        &.up{
-          background: url("../../asset/img/icon/volume-medium.png")no-repeat;
+        &.up {
+          background: url("../../asset/img/icon/volume-medium.png") no-repeat;
           background-size: cover;
         }
-        &.down{
-          background: url("../../asset/img/icon/volume-mute.png")no-repeat;
+        &.down {
+          background: url("../../asset/img/icon/volume-mute.png") no-repeat;
           background-size: cover;
         }
       }
     }
-    .play-info-action{
+    .play-info-action {
       display: flex;
       align-items: center;
-      i{
+      i {
         display: inline-block;
         width: 20px;
         height: 20px;
         cursor: pointer;
         margin-left: 20px;
-        &.play-list{
+        &.play-list {
           background: url("../../asset/img/icon/play-list.png") no-repeat;
           background-size: cover;
         }
-        &.random-play{
+        &.random-play {
           background: url("../../asset/img/icon/random-play.png") no-repeat;
           background-size: cover;
         }
-        &.sequential-play{
+        &.sequential-play {
           background: url("../../asset/img/icon/sequential-play.png") no-repeat;
           background-size: cover;
         }
-        &.loop-play{
+        &.loop-play {
           background: url("../../asset/img/icon/loop-play.png") no-repeat;
           background-size: cover;
         }
-        &.single-play{
+        &.single-play {
           background: url("../../asset/img/icon/single-play.png") no-repeat;
           background-size: cover;
         }
